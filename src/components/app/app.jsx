@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-
-// pages //
 import WelcomeScreen from "../welcome-screen/welcome-screen";
 import FailScreen from "../fail-screen/fail-screen";
 import GameArtistScreen from "../game-artist-screen/game-artist-screen";
@@ -19,19 +17,19 @@ const App = (props) => {
         <Route path="/" exact>
           <WelcomeScreen errorsCount={errorsCount} />
         </Route>
-        <Route path="/signin" exact>
+        <Route path="/login" exact>
           <LoginScreen />
         </Route>
-        <Route path="/genre" exact>
+        <Route path="/dev-genre" exact>
           <GameGenreScreen />
         </Route>
-        <Route path="/artist" exact>
+        <Route path="/dev-artist" exact>
           <GameArtistScreen />
         </Route>
-        <Route path="/success" exact>
+        <Route path="/result" exact>
           <SuccessScreen />
         </Route>
-        <Route path="/fail" exact>
+        <Route path="/lose" exact>
           <FailScreen />
         </Route>
       </Switch>

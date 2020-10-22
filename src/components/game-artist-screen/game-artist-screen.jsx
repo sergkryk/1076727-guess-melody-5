@@ -1,9 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {GameType} from "../../const";
+
+import artistQuestionProp from "./artist-question.prop";
 
 const GameArtistScreen = (props) => {
-  const {onAnswer, question, question: {answers, song}} = props;
+  const {onAnswer, question, renderPlayer} = props;
+  const {
+    answers,
+    song,
+  } = question;
 
   return (
     <section className="game game--artist">
@@ -25,10 +30,7 @@ const GameArtistScreen = (props) => {
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            <button className="track__button track__button--play" type="button"></button>
-            <div className="track__status">
-              <audio src={song.src}></audio>
-            </div>
+            {renderPlayer(song.src, 0)}
           </div>
         </div>
         <form className="game__artist">
@@ -53,17 +55,8 @@ const GameArtistScreen = (props) => {
 
 GameArtistScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
-  question: PropTypes.shape({
-    answers: PropTypes.arrayOf(PropTypes.shape({
-      picture: PropTypes.string.isRequired,
-      artist: PropTypes.string.isRequired,
-    })),
-    song: PropTypes.shape({
-      artist: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired
-    }),
-    type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
-  }).isRequired,
+  question: artistQuestionProp,
+  renderPlayer: PropTypes.func.isRequired,
 };
 
 export default GameArtistScreen;

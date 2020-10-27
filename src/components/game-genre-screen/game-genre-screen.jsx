@@ -13,7 +13,7 @@ class GameGenreScreen extends PureComponent {
   }
 
   render() {
-    const {onAnswer, question, renderPlayer, question: {answers, genre}} = this.props;
+    const {onAnswer, question, renderPlayer, children, question: {answers, genre}} = this.props;
     const {answers: userAnswers} = this.state;
 
     return (
@@ -29,11 +29,7 @@ class GameGenreScreen extends PureComponent {
               style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
           </svg>
 
-          <div className="game__mistakes">
-            <div className="wrong"></div>
-            <div className="wrong"></div>
-            <div className="wrong"></div>
-          </div>
+          {children}
         </header>
 
         <section className="game__screen">
@@ -73,6 +69,7 @@ class GameGenreScreen extends PureComponent {
 }
 
 GameGenreScreen.propTypes = {
+  children: PropTypes.element.isRequired,
   onAnswer: PropTypes.func.isRequired,
   question: genreQuestionProp,
   renderPlayer: PropTypes.func.isRequired,

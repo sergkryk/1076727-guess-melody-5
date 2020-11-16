@@ -1,9 +1,9 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import WelcomeScreen from "../welcome-screen/welcome-screen";
-import FailScreen from "../fail-screen/fail-screen";
+import GameOverScreen from "../game-over-screen/game-over-screen";
 import LoginScreen from "../login-screen/login-screen";
-import SuccessScreen from "../success-screen/success-screen";
+import WinScreen from "../win-screen/win-screen";
 import GameScreen from "../game-screen/game-screen";
 import {MAX_MISTAKE_COUNT} from "../../const";
 
@@ -23,12 +23,22 @@ const App = () => {
         <Route path="/login" exact>
           <LoginScreen />
         </Route>
-        <Route path="/result" exact>
-          <SuccessScreen />
-        </Route>
-        <Route path="/lose" exact>
-          <FailScreen />
-        </Route>
+        <Route exact
+          path="/result"
+          render={({history}) => (
+            <WinScreen
+              onReplayButtonClick={() => history.push(`/game`)}
+            />
+          )}
+        />
+        <Route exact
+          path="/lose"
+          render={({history}) => (
+            <GameOverScreen
+              onReplayButtonClick={() => history.push(`/game`)}
+            />
+          )}
+        />
         <Route exact path="/game">
           <GameScreen
             errorsCount={MAX_MISTAKE_COUNT}
